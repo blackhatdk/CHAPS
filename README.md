@@ -1,6 +1,7 @@
 **Configuration Hardening Assessment PowerShell Script (CHAPS)**
 CHAPS is a PowerShell script designed to assess system security settings in environments where installing additional software or assessment tools like Microsoft Policy Analyzer isn't feasible. Here's how to use it effectively:
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 **HOW TO USE **
 Step 1: Preparing for Execution
@@ -34,6 +35,59 @@ Copy these files for review, then delete them. Restart the system's anti-virus i
 Step 5: Utilizing CHAPS Assessment Guide
 Refer to the provided CHAPS Assessment Guide to discuss findings and recommendations with system administrators or your team.
 By following these steps, you can effectively assess and enhance system security configurations within your Windows environment using CHAPS.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+**System Configuration Checks**
+
+System Info Command: Run systeminfo to gather system information for further analysis.
+
+Administrator Rights: Check if the user has administrator privileges, essential for some checks to work effectively. Uncomment the error suppression line if needed.
+
+System Information:
+
+. System Version
+. User and Path Information
+. IPv4 and IPv6 addresses
+. Windows AutoUpdate configuration
+. Check for missing Critical and Important Updates
+.BitLocker Disk Encryption status
+. AlwaysInstallElevated Registry Keys check
+. PowerShell Event Log Settings:
+
+Verify PowerShell Commandline, Module, Script Block, and Invocation Logging statuses.
+Check PowerShell Protected Event Logging.
+Windows Event Log Configurations:
+
+Review maximum log file settings for critical logs.
+PowerShell Configuration Settings:
+
+Determine PowerShell version and restrictions.
+Check installed .NET versions.
+Cached Credentials: Assess the number of Cached Credentials configured.
+
+Remote Access Configurations:
+
+Check RDP settings for remote connections.
+Verify WinRM configuration and Firewall rules.
+Local Administrator Accounts: Ensure only necessary users are members of the Local Administrator group.
+
+CHAPS PowerSploit Security Checks: Utilize PowerSploit for additional system information gathering. Disable anti-malware temporarily.
+
+Secure Baseline Checks - Securing Windows Workstations:
+
+Assess AppLocker, EMET, LAPS deployment, and Group Policy settings.
+Verify disabling of Net Session Enumeration, WPAD, LLMNR, Windows Browser Protocol, NetBIOS, Windows Scripting, WDigest, SMBv1.
+Check for blocking untrusted fonts, enabling Credential/Device Guard, securing LanMan Authentication, and restricting RPC Clients.
+Configure NTLM session security.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**Practical video  **
+https://drive.google.com/file/d/1eMYiDbOvsFilK5w6u1F75bde3lJUDRpv/view?usp=drive_link
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Collaborators
 Special thanks to collaborators who contributed to troubleshooting and enhancing the CHAPS project, including h1k0r.
