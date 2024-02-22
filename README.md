@@ -28,7 +28,8 @@ Run the following commands ``` chaps-powershell.ps1```  to import and execute Po
 vbnet
 ```Copy code
 IEX (New-Object Net.WebClient).DownloadString('http://<webserver>:8181/PowerSploit/Recon/PowerView.ps1')
-IEX (New-Object Net.WebClient).DownloadString('http://<webserver>:8181/PowerSploit/Exfiltration/Get-GPPPassword.ps1') ```
+IEX (New-Object Net.WebClient).DownloadString('http://<webserver>:8181/PowerSploit/Exfiltration/Get-GPPPassword.ps1')
+```
 
 
 Step 4: Reviewing Output
@@ -102,7 +103,7 @@ By following these steps, you can effectively assess and enhance system security
  https://drive.google.com/file/d/1eMYiDbOvsFilK5w6u1F75bde3lJUDRpv/view?usp=drive_link
 
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Collaborators
 Special thanks to collaborators who contributed to troubleshooting and enhancing the CHAPS project, including h1k0r.
