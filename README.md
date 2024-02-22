@@ -1,13 +1,44 @@
 # Configuration Hardening Assessment PowerShell Script (CHAPS)
 CHAPS is a PowerShell script for checking system security settings where additional software and assessment tools, such as Microsoft Policy Analyzer, cannot be installed. The purpose of this script is to run it on a server or workstation to collect configuration information about that system. The information collected can then be used to provide recommendations (and references) to improve the security of the individual system and systemic issues within the organization's Windows environment. Examples of environments where this script is useful include Industrial Control System (ICS) environments where systems cannot be modified. These systems include Engineer / Operator workstations, Human Machine Interface (HMI) systems, and management servers that are deployed in production environments.
 
-This script is NOT intended to be a replacement for Microsoft's Policy Analyzer. The best way to audit a system's configuration is to use the [Microsoft Security Compliance Toolkit](https://docs.microsoft.com/en-us/windows/security/threat-protection/security-compliance-toolkit-10) and Policy Analyzer with a [Windows Workstation Security Baseline GPO](https://adsecurity.org/?p=3299). The Policy Analyzer's output can be exported an MS Excel file, but it requires the Microsoft Excel is installed on the system. Cut and pasting this information does work, but might not be an option on a physical system. Also, using the Policy Analyzer requires installation of the Windows software, which may not be permitted.
 
-This script runs in PowerShell and should be PowerShell-version independent. Some checks may fail depending on the Windows version, system configurations, and whether or not it is run with Administrator privileges. Instances where commands did not run successfully are noted and should be manually investigated where possible.
-
-This script was developed using information from several sources \(noted in Useful Resources section\) to identify recommended security configurations to reduce the likelihood of a compromised system and to log user events conducted on the system. It pulls heavily from the [Securing Windows Workstations](https://adsecurity.org/?p=3299) baseline outlined by [Sean Metcalf](https://adsecurity.org/?author=2). 
 
 ## How To Use
+Step 1: Preparing for Execution
+Ensure you have CHAPS and PowerSploit scripts downloaded into the same directory.
+Open a terminal and navigate to that directory.
+Start a Python3 web server by running ```python3 -m http.server 8181```. This serves the scripts from another system on the network.
+
+
+Step 2: Running CHAPS on the Target System
+On the target system, open a CMD.exe window as an Administrator.
+Run powershell.exe -exec bypass to launch a PowerShell prompt.
+If using a PowerShell terminal, execute Set-ExecutionPolicy Bypass -scope Process to allow script execution.
+Execute the CHAPS script with:
+vbnet
+Copy code
+IEX (New-Object Net.WebClient).DownloadString('http://<webserver>:8181/chaps/chaps.ps1')
+
+
+Step 3: Running CHAPS PowerSploit Checks
+For additional checks using PowerSploit, disable the system's anti-virus.
+Run the following commands to import and execute PowerSploit scripts:
+vbnet
+Copy code
+IEX (New-Object Net.WebClient).DownloadString('http://<webserver>:8181/PowerSploit/Recon/PowerView.ps1')
+IEX (New-Object Net.WebClient).DownloadString('http://<webserver>:8181/PowerSploit/Exfiltration/Get-GPPPassword.ps1')
+...
+
+
+Step 4: Reviewing Output
+Outputs of each script will be written to the user's Temp directory.
+Copy these files for review, then delete them. Restart the system's anti-virus if necessary.
+
+
+Step 5: Utilizing CHAPS Assessment Guide
+Refer to the provided CHAPS Assessment Guide to discuss findings and recommendations with system administrators or your team.
+By following these steps, you can effectively assess and enhance system security configurations within your Windows environment using CHAPS.
+
 The best way to run this script within an ICS environment is to not write any programs or scripts to the system being reviewed. Do this by serving these scripts from a webserver running on another system on the network. Download CHAPS and PowerSploit into the same directory and open a terminal and change into that directory. Using Python3 run the command ```python3 -m http.server 8181```. This will start a webserver listening on all of the systems IP addresses. 
 
 On the target system open a CMD.exe window, preferably as an Administrator. Run the command ```powershell.exe -exec bypass``` to being a PowerShell prompt. If you started a PowerShell terminal, as administrator, run the ```Set-ExecutionPolicy Bypass -scope Process``` to allow scripts to execute. From this prompt, run the following command to execute the ```chaps.ps1``` script.
